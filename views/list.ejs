@@ -1,0 +1,50 @@
+<!--<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+     <meta charset="utf-8">
+     <title>To DO List</title>  
+     <link rel="stylesheet" href="/css/styles.css">
+
+    </head>
+    <body>-->
+        <%- include("header") -%>
+        <div class="box" id="heading">
+           
+           <h1><%= listTitle %></h1>
+
+     </div>
+     <div class="box">
+        
+       <% newListitem.forEach(function(item){ %>
+        <form action="/delete" method="post">
+            <div class="item">
+                <input type="checkbox" name="checkbox" value="<%= item._id %>" onchange="this.form.submit()">
+                <p><%= item.name %></p>
+            </div>
+            <input type="hidden" name="ListName" value="<%= listTitle %>"></input>
+            </form>
+      <% }) %> 
+        <!--<% for(let i=0; i<newListitem.length ; i++){ %>
+            <div class="item">
+                <input type="checkbox">
+                <p><%= newListitem[i].name %></p>
+            </div>
+           
+        <% } %>-->
+        <form class="item" action="/" method="post">
+            <input type="text" name="newitem" placeholder="New Item" autocomplete="off">
+            <button type="submit" name="list" value="<%= listTitle %>">+</button>
+           </form>
+
+     </div>
+    
+     <%- include("footer") -%>
+  
+ 
+
+
+
+
+   <!-- </body>
+
+</html>-->
