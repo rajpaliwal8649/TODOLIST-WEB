@@ -30,16 +30,7 @@ const listSchema={
   items:[itemsSchema]
 }
 const List=mongoose.model("List",listSchema);
-/*Item.insertMany(defaultItems).then(function(error){
-  console.log("successfully saved default items to DB.");
-  
-});*/
 
-  
-
-
-//let items=["Buy Food","Cook Food","Eat Food"];
-//let workitems=[];
 
 app.set('view engine', 'ejs');
 app.get("/",function(req,res){
@@ -60,14 +51,11 @@ app.get("/",function(req,res){
 });
 app.get("/:customListName",function(req,res){
   const customListName = _.capitalize(req.params.customListName);
-  /*const list=new List({
-    name:customListName,
-    items:defaultItems
-  });*/
+ 
 
   List.findOne({name:customListName}).then(function(foundList){
    if(!foundList){
-      //console.log("Doesnt exist");
+      
       const list=new List({
         name:customListName,
         items:defaultItems
@@ -76,7 +64,7 @@ app.get("/:customListName",function(req,res){
       res.redirect("/"+ customListName);
    }
    else{
-    //console.log("Exists");
+    
     res.render("list",{listTitle:foundList.name,newListitem:foundList.items});
    }
   });
@@ -88,7 +76,7 @@ app.get("/:customListName",function(req,res){
 
 
 app.post("/",function(req,res){
-//letitems=req.body.newitem;
+
 const itemName=req.body.newitem;
 const ListName=req.body.list;
 const item=new Item({
@@ -107,16 +95,10 @@ else{
 }
 
 
-/*if(req.body.list==="Work"){
-  workitems.push(items);
-  res.redirect("/work");
-}else{
-items.push(items);
-res.redirect("/");
-}*/
+
 });
 app.post("/delete",function(req,res){
-  //console.log(req.body.checkbox);
+
   const checkeditemId=req.body.checkbox;
   const ListName=req.body.ListName;
   if(ListName==="Today"){
@@ -145,5 +127,5 @@ app.post("/work",function(req,res){
 });
 
 app.listen(3000,function(){
-    console.log("Server is running on port 3000");
+    console.log("server is running on port 3000");
 });
